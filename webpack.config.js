@@ -1,5 +1,5 @@
 const path = require('path');
-let src = path.join(__dirname, '/src');
+let srcDir = path.join(__dirname, '/src');
 let publicDir = path.join(__dirname, '/public');
 
 module.exports = {

@@ -1,18 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import SignUp from './components/SignUp.jsx';
+import Main from './components/Main.jsx';
 
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
-export default class App extends React.Component {
+export default class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+           view: 'signUp'
+        };
+    }
+
+    mainChangeHandler() {
+        this.setState({view: 'main'});
     }
 
     render() {
+        console.log(this.props);
         return (
-            <div>Hello</div>
+            <SignUp router={this.props.router}/>            
         );
     }
 }
