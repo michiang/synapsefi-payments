@@ -12,6 +12,8 @@ Payment service built with SynapseFI Node API.
 
 ### Installation
 
+Make sure you're running Node v6.0.0+
+
 ```
 npm install
 npm run dev (node server)
