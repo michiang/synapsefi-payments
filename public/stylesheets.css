@@ -13,3 +13,26 @@
 .m-r {
     margin-right: 15px;
 }
+
+.max-table-height {
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+.synapsefi-color {
+    background-color: #049cb0 !important;
+}
+
+.color-button-synapsefi {
+  background-color: #049cb0 !important;
+  border-color: #049cb0 !important;
+  color: #fff !important;
+}
+
+.text-color-white {
+    color: white;
+}
+
+.panel-border-synapsefi {
+    border-color: #049cb0 !important;
+}

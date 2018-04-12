@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import SignUp from './components/SignUp.jsx';
-import Main from './components/Main.jsx';
-
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import SignUp from './components/actions/SignUp.jsx';
 
 export default class App extends Component {
     constructor(props) {
@@ -19,7 +16,6 @@ export default class App extends Component {
     }
 
     render() {
-        console.log(this.props);
         return (
             <SignUp router={this.props.router}/>            
         );

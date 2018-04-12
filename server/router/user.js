@@ -4,8 +4,6 @@ const keys = require('../../keys');
 const Clients = SynapsePay.Clients;
 const Helpers = SynapsePay.Helpers;
 const Users = SynapsePay.Users;
-const Nodes = SynapsePay.Nodes;
-const Transactions = SynapsePay.Transactions;
 
 const router = express.Router();
 const client = new Clients(keys.client_id, keys.client_secret, false);
@@ -17,7 +15,6 @@ router.get('/', function (req, res) {
 
 // Create a User
 router.post('/createUser', (req, res) => {
-    console.dir(req.body);
     const createPayload = {
         logins: [
             {
@@ -26,11 +23,15 @@ router.post('/createUser', (req, res) => {
                 read_only: false,
             }
         ],
-        phone_numbers: [req.body.phone_numbers],
-        legal_names: [req.body.legal_names]
+        phone_numbers: [
+            req.body.phone_numbers
+        ],
+        legal_names: [
+            req.body.legal_names
+        ]
     };
 
-    Users.create(client, keys.finger_print, getUserIP(), createPayload, function(err, response) {
+    Users.create(client, keys.finger_print, getUserIP(), createPayload, (err, response) => {
         if (err) {
             console.dir(err);
         } else {
@@ -39,27 +40,31 @@ router.post('/createUser', (req, res) => {
     });
 });
 
-//Create a node 
-router.post('/createNode', (req, res) => {
-    const user = req.body.user;
-    const nodePayload = {
-        type: 'SYNAPSE-US',
-        info: {
-            nickname: req.body.nickname,
-        },
-        extra: {
-            supp_id: '43294',
-        }
+//Get users
+router.get('/getUsers', (req, res) => {
+    const options = {
+        ip_address: getUserIP(),
+        page: '',
+        per_page: '',
+        query: ''
     };
-    Nodes.create(user, nodePayload, function(err, response) {
-        if (err) {
-            console.dir(err);
-        } else {
-            res.send(response);
-        }
+    Users.get(client, options, (err, response) => {
+        res.send(response.users);
     });
 });
 
+//Get user
+router.post('/getUser', (req, res) => {
+    const selectedUserId = req.body.selectedUserId;
+    const options = {
+        _id: selectedUserId,
+        fingerprint: keys.finger_print,
+        ip_address: getUserIP()
+    };
 
+    Users.get(client, options, (err, response) => {
+        res.send(response);
+    });
+});
 
 module.exports = router;

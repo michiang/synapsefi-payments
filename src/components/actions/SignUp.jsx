@@ -4,10 +4,6 @@ import axios from 'axios';
 
 import { FormGroup, FormControl, Button, ControlLabel } from 'react-bootstrap';
 
-import { createUser } from '../helpers/user'; 
-
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-
 export default class SignUp extends Component {
     constructor(props) {
         super(props);
@@ -21,36 +17,64 @@ export default class SignUp extends Component {
     }
 
     handleNameChange(e) {
-        this.setState({ name: e.target.value });
+        this.setState({ 
+            name: e.target.value 
+        });
     }
 
     handlePasswordChange(e) {
-        this.setState({ password: e.target.value });
+        this.setState({ 
+            password: e.target.value 
+        });
     }
 
     handleEmailChange(e) {
-        this.setState({ email: e.target.value });
+        this.setState({ 
+            email: e.target.value 
+        });
     }
 
     handlePhoneChange(e) {
-        this.setState({ phone: e.target.value });
+        this.setState({ 
+            phone: e.target.value 
+        });
     }
 
     handleAccountNameChange(e) {
-        this.setState({ accountName: e.target.value });
+        this.setState({ 
+            accountName: e.target.value 
+        });
+    }
+
+    createUser(userData) {
+        axios.post('/api/users/createUser', userData).then((user) => {
+            const postData = {
+                user: user.data,
+                nickname: userData.accountName
+            };
+            this.addBank(postData);
+        });
+    }
+
+    addBank(postData) {
+        axios.post('/api/nodes/addBank', postData).then((users) => {
+            this.setState({
+                userId: users.data[0].user.json._id
+            }, () => {
+                this.props.router.push({ pathname: '/main', state: this.state });
+            });
+        });
     }
 
     handleSubmit() {
-        console.log(this.state);
-        const user = {
+        const userData = {
             legal_names: this.state.name,
             password: this.state.password,
             email: this.state.email,
             phone_numbers: this.state.phone,
             accountName: this.state.accountName
         };
-        createUser(user);
-        this.props.router.push({pathname: '/main', state: this.state});
+        this.createUser(userData);
     }
 
     render() {
@@ -63,8 +87,8 @@ export default class SignUp extends Component {
 
         return (
             <div>
-                <nav className="navbar navbar-default text-color-blue">
-                    <div className="text-center m-t m-l">SynapseFI - Payment System</div>
+                <nav className="navbar navbar-default synapsefi-color">
+                    <div className="text-color-white m-t m-l"><span>SynapseFI - Payments made by Michael Chiang</span></div>
                 </nav>
                 <h1 className='col-xs-12 text-center'>Sign up for a SynapseFI account!</h1>
                 <form>
@@ -123,13 +147,11 @@ export default class SignUp extends Component {
                             />
                         </FormGroup>
                     </div>
-                    <div className='text-center col-xs-offset-4 col-xs-4'>
-                            <Button onClick={handleSubmit}>Submit</Button>
+                    <div className='text-right col-xs-offset-4 col-xs-4'>
+                        <Button onClick={handleSubmit} className="color-button-synapsefi">Submit</Button>
                     </div>
                 </form>
             </div>
         );
     }
 }
-
-
