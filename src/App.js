@@ -1,25 +1,21 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
-import SignUp from './components/actions/SignUp.jsx';
+import Table from './components/Table.jsx';
 
 export default class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-           view: 'signUp'
-        };
-    }
-
-    mainChangeHandler() {
-        this.setState({view: 'main'});
+        this.state = {};
     }
 
     render() {
+        //x and y determine the number of rows and columns, respectively
         return (
-            <SignUp router={this.props.router}/>            
+            <div style={{ width: 'max-content' }}>
+                <Table x={10} y={10} />
+            </div>        
         );
     }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />,document.getElementById('root'));

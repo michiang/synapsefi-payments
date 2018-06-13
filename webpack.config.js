@@ -3,7 +3,7 @@ let srcDir = path.join(__dirname, '/src');
 let publicDir = path.join(__dirname, '/public');
 
 module.exports = {
-    entry: `${srcDir}/index.jsx`,
+    entry: `${srcDir}/App.js`,
     mode: 'none',
     output: {
         filename: 'bundle.js',

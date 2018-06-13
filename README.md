@@ -1,14 +1,11 @@
-# SynapseFI Payments Project
+# Zugata Spreadsheet Project
 
-Payment service built with SynapseFI Node API. 
+Simple spreadsheet built with JavaScript, React, and hot-formula-parser library
 
 ## Getting Started
 
-* Log in by inputting username, password, email, phone number, and bank account namme
-* Select a user in payment section and wait for user to be selected.
-* Enter in a payment amount and click send
-* Review transaction history / user list
-* Switch between ACH US node and original synapse account
+* Click and input any valid values into any cell
+* Execute any excel mathematical expressions such as =ADD(D3, E6) or MUL(A2, C4)
 
 ### Installation
 
@@ -24,8 +21,4 @@ npm run build (run webpack on separate terminal instance)
 
 * React 
 * Node
-* Express
-* Webpack
-* Bootstrap (react-bootstrap)
-* Material Design
-* Axios (promise-based client-side HTTP requests)
+* Formula Parser Library: https://github.com/handsontable/formula-parser
